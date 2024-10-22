@@ -1,0 +1,70 @@
+{
+  "kind": "collectionType",
+  "collectionName": "walks",
+  "info": {
+    "singularName": "walk",
+    "pluralName": "walks",
+    "displayName": "Walk"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Title": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "uid",
+      "required": true,
+      "targetField": "Title"
+    },
+    "rating": {
+      "type": "decimal"
+    },
+    "address": {
+      "type": "string"
+    },
+    "overview": {
+      "type": "text",
+      "required": true
+    },
+    "website": {
+      "type": "string"
+    },
+    "image": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": true,
+      "required": false
+    },
+    "featured": {
+      "type": "boolean",
+      "default": false
+    },
+    "duration": {
+      "type": "string"
+    },
+    "difficulty": {
+      "type": "enumeration",
+      "enum": [
+        "Easy",
+        "Moderate",
+        "Challenging"
+      ]
+    },
+    "coordinates": {
+      "type": "blocks"
+    },
+    "seo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.seo"
+    }
+  }
+}

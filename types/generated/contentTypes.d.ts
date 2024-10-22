@@ -639,6 +639,46 @@ export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiWalkWalk extends Struct.CollectionTypeSchema {
+  collectionName: 'walks';
+  info: {
+    singularName: 'walk';
+    pluralName: 'walks';
+    displayName: 'Walk';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Title: Schema.Attribute.String;
+    slug: Schema.Attribute.UID<'Title'> & Schema.Attribute.Required;
+    rating: Schema.Attribute.Decimal;
+    address: Schema.Attribute.String;
+    overview: Schema.Attribute.Text & Schema.Attribute.Required;
+    website: Schema.Attribute.String;
+    image: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
+    featured: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    duration: Schema.Attribute.String;
+    difficulty: Schema.Attribute.Enumeration<
+      ['Easy', 'Moderate', 'Challenging']
+    >;
+    coordinates: Schema.Attribute.Blocks;
+    seo: Schema.Attribute.Component<'shared.seo', false>;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::walk.walk'>;
+  };
+}
+
 export interface AdminPermission extends Struct.CollectionTypeSchema {
   collectionName: 'admin_permissions';
   info: {
@@ -1019,6 +1059,7 @@ declare module '@strapi/strapi' {
       'api::author.author': ApiAuthorAuthor;
       'api::category.category': ApiCategoryCategory;
       'api::global.global': ApiGlobalGlobal;
+      'api::walk.walk': ApiWalkWalk;
       'admin::permission': AdminPermission;
       'admin::user': AdminUser;
       'admin::role': AdminRole;
