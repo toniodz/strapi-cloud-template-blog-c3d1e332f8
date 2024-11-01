@@ -645,6 +645,7 @@ export interface ApiWalkWalk extends Struct.CollectionTypeSchema {
     singularName: 'walk';
     pluralName: 'walks';
     displayName: 'Walk';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -667,6 +668,46 @@ export interface ApiWalkWalk extends Struct.CollectionTypeSchema {
     >;
     coordinates: Schema.Attribute.Blocks;
     seo: Schema.Attribute.Component<'shared.seo', false>;
+    gallery: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
+    Terrain: Schema.Attribute.Enumeration<
+      [
+        'Flat',
+        'Hilly',
+        'Mountainous',
+        'Woodland',
+        'Beach',
+        'Urban',
+        'Meadow',
+        'Rocky',
+        'Muddy',
+        'Gravel',
+        'Sand',
+        'Grass',
+        'Park',
+      ]
+    >;
+    Features: Schema.Attribute.Enumeration<
+      [
+        'Free Parking',
+        'Paid Parking',
+        'Accessible (Wheelchair/Pushchair Friendly)',
+        'Refreshments (Caf\u00E9 or Pub Nearby)',
+        'Public Restrooms',
+        'Dog-Friendly Water Stations',
+        'Off-Lead Walking Area',
+        'Dog Waste Bins',
+        'Seating/Rest Areas',
+        'Shaded Areas',
+        'Picnic Spots',
+        'Children\u2019s Playground',
+        'Scenic Viewpoints',
+        'Camping Allowed',
+      ]
+    >;
+    Town: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;

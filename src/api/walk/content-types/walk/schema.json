@@ -4,7 +4,8 @@
   "info": {
     "singularName": "walk",
     "pluralName": "walks",
-    "displayName": "Walk"
+    "displayName": "Walk",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -33,15 +34,15 @@
       "type": "string"
     },
     "image": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": true,
-      "required": false
+      ]
     },
     "featured": {
       "type": "boolean",
@@ -65,6 +66,56 @@
       "type": "component",
       "repeatable": false,
       "component": "shared.seo"
+    },
+    "gallery": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": true
+    },
+    "Terrain": {
+      "type": "enumeration",
+      "enum": [
+        "Flat",
+        "Hilly",
+        "Mountainous",
+        "Woodland",
+        "Beach",
+        "Urban",
+        "Meadow",
+        "Rocky",
+        "Muddy",
+        "Gravel",
+        "Sand",
+        "Grass",
+        "Park"
+      ]
+    },
+    "Features": {
+      "type": "enumeration",
+      "enum": [
+        "Free Parking",
+        "Paid Parking",
+        "Accessible (Wheelchair/Pushchair Friendly)",
+        "Refreshments (Café or Pub Nearby)",
+        "Public Restrooms",
+        "Dog-Friendly Water Stations",
+        "Off-Lead Walking Area",
+        "Dog Waste Bins",
+        "Seating/Rest Areas",
+        "Shaded Areas",
+        "Picnic Spots",
+        "Children’s Playground",
+        "Scenic Viewpoints",
+        "Camping Allowed"
+      ]
+    },
+    "Town": {
+      "type": "string"
     }
   }
 }
