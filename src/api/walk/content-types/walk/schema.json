@@ -81,27 +81,7 @@
     "Town": {
       "type": "string"
     },
-    "Terrain": {
-      "type": "customField",
-      "default": "[]",
-      "options": [
-        "Flat",
-        "Hilly",
-        "Mountainous",
-        "Woodland",
-        "Beach",
-        "Urban",
-        "Meadow",
-        "Rocky",
-        "Muddy",
-        "Gravel",
-        "Sand",
-        "Grass",
-        "Park"
-      ],
-      "customField": "plugin::multi-select.multi-select"
-    },
-    "Features": {
+    "Features2": {
       "type": "customField",
       "default": "[]",
       "options": [
@@ -119,6 +99,26 @@
         "Children’s Playground",
         "Scenic Viewpoints",
         "Camping Allowed"
+      ],
+      "customField": "plugin::multi-select.multi-select"
+    },
+    "Terrain2": {
+      "type": "customField",
+      "default": "[]",
+      "options": [
+        "Flat",
+        "Hilly",
+        "Mountainous",
+        "Woodland",
+        "Beach",
+        "Urban",
+        "Meadow",
+        "Rocky",
+        "Muddy",
+        "Gravel",
+        "Sand",
+        "Grass",
+        "Park"
       ],
       "customField": "plugin::multi-select.multi-select"
     }

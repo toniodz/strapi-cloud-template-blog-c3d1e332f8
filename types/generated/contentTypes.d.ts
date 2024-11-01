@@ -673,27 +673,7 @@ export interface ApiWalkWalk extends Struct.CollectionTypeSchema {
       true
     >;
     Town: Schema.Attribute.String;
-    Terrain: Schema.Attribute.JSON &
-      Schema.Attribute.CustomField<
-        'plugin::multi-select.multi-select',
-        [
-          'Flat',
-          'Hilly',
-          'Mountainous',
-          'Woodland',
-          'Beach',
-          'Urban',
-          'Meadow',
-          'Rocky',
-          'Muddy',
-          'Gravel',
-          'Sand',
-          'Grass',
-          'Park',
-        ]
-      > &
-      Schema.Attribute.DefaultTo<'[]'>;
-    Features: Schema.Attribute.JSON &
+    Features2: Schema.Attribute.JSON &
       Schema.Attribute.CustomField<
         'plugin::multi-select.multi-select',
         [
@@ -711,6 +691,26 @@ export interface ApiWalkWalk extends Struct.CollectionTypeSchema {
           'Children\u2019s Playground',
           'Scenic Viewpoints',
           'Camping Allowed',
+        ]
+      > &
+      Schema.Attribute.DefaultTo<'[]'>;
+    Terrain2: Schema.Attribute.JSON &
+      Schema.Attribute.CustomField<
+        'plugin::multi-select.multi-select',
+        [
+          'Flat',
+          'Hilly',
+          'Mountainous',
+          'Woodland',
+          'Beach',
+          'Urban',
+          'Meadow',
+          'Rocky',
+          'Muddy',
+          'Gravel',
+          'Sand',
+          'Grass',
+          'Park',
         ]
       > &
       Schema.Attribute.DefaultTo<'[]'>;
