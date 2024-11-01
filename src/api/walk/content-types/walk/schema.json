@@ -68,18 +68,23 @@
       "component": "shared.seo"
     },
     "gallery": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": true
+      ]
+    },
+    "Town": {
+      "type": "string"
     },
     "Terrain": {
-      "type": "enumeration",
-      "enum": [
+      "type": "customField",
+      "default": "[]",
+      "options": [
         "Flat",
         "Hilly",
         "Mountainous",
@@ -93,11 +98,13 @@
         "Sand",
         "Grass",
         "Park"
-      ]
+      ],
+      "customField": "plugin::multi-select.multi-select"
     },
     "Features": {
-      "type": "enumeration",
-      "enum": [
+      "type": "customField",
+      "default": "[]",
+      "options": [
         "Free Parking",
         "Paid Parking",
         "Accessible (Wheelchair/Pushchair Friendly)",
@@ -112,10 +119,8 @@
         "Children’s Playground",
         "Scenic Viewpoints",
         "Camping Allowed"
-      ]
-    },
-    "Town": {
-      "type": "string"
+      ],
+      "customField": "plugin::multi-select.multi-select"
     }
   }
 }

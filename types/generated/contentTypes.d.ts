@@ -672,42 +672,48 @@ export interface ApiWalkWalk extends Struct.CollectionTypeSchema {
       'images' | 'files' | 'videos' | 'audios',
       true
     >;
-    Terrain: Schema.Attribute.Enumeration<
-      [
-        'Flat',
-        'Hilly',
-        'Mountainous',
-        'Woodland',
-        'Beach',
-        'Urban',
-        'Meadow',
-        'Rocky',
-        'Muddy',
-        'Gravel',
-        'Sand',
-        'Grass',
-        'Park',
-      ]
-    >;
-    Features: Schema.Attribute.Enumeration<
-      [
-        'Free Parking',
-        'Paid Parking',
-        'Accessible (Wheelchair/Pushchair Friendly)',
-        'Refreshments (Caf\u00E9 or Pub Nearby)',
-        'Public Restrooms',
-        'Dog-Friendly Water Stations',
-        'Off-Lead Walking Area',
-        'Dog Waste Bins',
-        'Seating/Rest Areas',
-        'Shaded Areas',
-        'Picnic Spots',
-        'Children\u2019s Playground',
-        'Scenic Viewpoints',
-        'Camping Allowed',
-      ]
-    >;
     Town: Schema.Attribute.String;
+    Terrain: Schema.Attribute.JSON &
+      Schema.Attribute.CustomField<
+        'plugin::multi-select.multi-select',
+        [
+          'Flat',
+          'Hilly',
+          'Mountainous',
+          'Woodland',
+          'Beach',
+          'Urban',
+          'Meadow',
+          'Rocky',
+          'Muddy',
+          'Gravel',
+          'Sand',
+          'Grass',
+          'Park',
+        ]
+      > &
+      Schema.Attribute.DefaultTo<'[]'>;
+    Features: Schema.Attribute.JSON &
+      Schema.Attribute.CustomField<
+        'plugin::multi-select.multi-select',
+        [
+          'Free Parking',
+          'Paid Parking',
+          'Accessible (Wheelchair/Pushchair Friendly)',
+          'Refreshments (Caf\u00E9 or Pub Nearby)',
+          'Public Restrooms',
+          'Dog-Friendly Water Stations',
+          'Off-Lead Walking Area',
+          'Dog Waste Bins',
+          'Seating/Rest Areas',
+          'Shaded Areas',
+          'Picnic Spots',
+          'Children\u2019s Playground',
+          'Scenic Viewpoints',
+          'Camping Allowed',
+        ]
+      > &
+      Schema.Attribute.DefaultTo<'[]'>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
