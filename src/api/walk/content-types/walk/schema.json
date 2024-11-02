@@ -121,6 +121,9 @@
         "Park"
       ],
       "customField": "plugin::multi-select.multi-select"
+    },
+    "region": {
+      "type": "string"
     }
   }
 }
