@@ -611,6 +611,79 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiCountyCounty extends Struct.CollectionTypeSchema {
+  collectionName: 'counties';
+  info: {
+    singularName: 'county';
+    pluralName: 'counties';
+    displayName: 'County';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    slug: Schema.Attribute.UID<'name'> & Schema.Attribute.Required;
+    type: Schema.Attribute.Enumeration<
+      ['ceremonial_county', 'metropolitan_county', 'unitary_authority']
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'ceremonial_county'>;
+    country: Schema.Attribute.Enumeration<
+      ['England', 'Wales', 'Scotland', 'Northern Ireland']
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'England'>;
+    description: Schema.Attribute.Blocks & Schema.Attribute.Required;
+    walks: Schema.Attribute.Relation<'oneToMany', 'api::walk.walk'>;
+    featured_image: Schema.Attribute.Media<'images' | 'files'> &
+      Schema.Attribute.Required;
+    gallery: Schema.Attribute.Media<'images' | 'files', true>;
+    seo: Schema.Attribute.Component<'shared.seo', true>;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::county.county'>;
+  };
+}
+
+export interface ApiFeatureFeature extends Struct.CollectionTypeSchema {
+  collectionName: 'features';
+  info: {
+    singularName: 'feature';
+    pluralName: 'features';
+    displayName: 'Feature';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    slug: Schema.Attribute.UID<'name'> & Schema.Attribute.Required;
+    description: Schema.Attribute.Blocks;
+    icon: Schema.Attribute.String;
+    walks: Schema.Attribute.Relation<'manyToMany', 'api::walk.walk'>;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::feature.feature'
+    >;
+  };
+}
+
 export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
   collectionName: 'globals';
   info: {
@@ -636,6 +709,43 @@ export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
       Schema.Attribute.Private;
     locale: Schema.Attribute.String;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::global.global'>;
+  };
+}
+
+export interface ApiTownTown extends Struct.CollectionTypeSchema {
+  collectionName: 'towns';
+  info: {
+    singularName: 'town';
+    pluralName: 'towns';
+    displayName: 'towns';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    slug: Schema.Attribute.UID<'name'>;
+    postcode_area: Schema.Attribute.String;
+    type: Schema.Attribute.Enumeration<['city', 'town', 'village', 'hamlet']> &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'town'>;
+    county: Schema.Attribute.Relation<'oneToOne', 'api::county.county'>;
+    description: Schema.Attribute.Blocks & Schema.Attribute.Required;
+    walks: Schema.Attribute.Relation<'oneToMany', 'api::walk.walk'>;
+    featured_image: Schema.Attribute.Media<'images' | 'files'> &
+      Schema.Attribute.Required;
+    gallery: Schema.Attribute.Media<'images' | 'files', true>;
+    seo: Schema.Attribute.Component<'shared.seo', true>;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::town.town'>;
   };
 }
 
@@ -672,28 +782,6 @@ export interface ApiWalkWalk extends Struct.CollectionTypeSchema {
       'images' | 'files' | 'videos' | 'audios',
       true
     >;
-    Town: Schema.Attribute.String;
-    Features2: Schema.Attribute.JSON &
-      Schema.Attribute.CustomField<
-        'plugin::multi-select.multi-select',
-        [
-          'Free Parking',
-          'Paid Parking',
-          'Accessible (Wheelchair/Pushchair Friendly)',
-          'Refreshments (Caf\u00E9 or Pub Nearby)',
-          'Public Restrooms',
-          'Dog-Friendly Water Stations',
-          'Off-Lead Walking Area',
-          'Dog Waste Bins',
-          'Seating/Rest Areas',
-          'Shaded Areas',
-          'Picnic Spots',
-          'Children\u2019s Playground',
-          'Scenic Viewpoints',
-          'Camping Allowed',
-        ]
-      > &
-      Schema.Attribute.DefaultTo<'[]'>;
     Terrain2: Schema.Attribute.JSON &
       Schema.Attribute.CustomField<
         'plugin::multi-select.multi-select',
@@ -714,7 +802,10 @@ export interface ApiWalkWalk extends Struct.CollectionTypeSchema {
         ]
       > &
       Schema.Attribute.DefaultTo<'[]'>;
-    region: Schema.Attribute.String;
+    county: Schema.Attribute.Relation<'manyToOne', 'api::county.county'>;
+    town: Schema.Attribute.Relation<'manyToOne', 'api::town.town'>;
+    postcode: Schema.Attribute.String & Schema.Attribute.Required;
+    features: Schema.Attribute.Relation<'manyToMany', 'api::feature.feature'>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -1106,7 +1197,10 @@ declare module '@strapi/strapi' {
       'api::article.article': ApiArticleArticle;
       'api::author.author': ApiAuthorAuthor;
       'api::category.category': ApiCategoryCategory;
+      'api::county.county': ApiCountyCounty;
+      'api::feature.feature': ApiFeatureFeature;
       'api::global.global': ApiGlobalGlobal;
+      'api::town.town': ApiTownTown;
       'api::walk.walk': ApiWalkWalk;
       'admin::permission': AdminPermission;
       'admin::user': AdminUser;

@@ -1,0 +1,79 @@
+{
+  "kind": "collectionType",
+  "collectionName": "counties",
+  "info": {
+    "singularName": "county",
+    "pluralName": "counties",
+    "displayName": "County",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name",
+      "required": true
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "ceremonial_county",
+        "metropolitan_county",
+        "unitary_authority"
+      ],
+      "default": "ceremonial_county",
+      "required": true
+    },
+    "country": {
+      "type": "enumeration",
+      "enum": [
+        "England",
+        "Wales",
+        "Scotland",
+        "Northern Ireland"
+      ],
+      "default": "England",
+      "required": true
+    },
+    "description": {
+      "type": "blocks",
+      "required": true
+    },
+    "walks": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::walk.walk",
+      "mappedBy": "county"
+    },
+    "featured_image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images",
+        "files"
+      ]
+    },
+    "gallery": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files"
+      ]
+    },
+    "seo": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.seo"
+    }
+  }
+}

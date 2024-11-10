@@ -1,0 +1,76 @@
+{
+  "kind": "collectionType",
+  "collectionName": "towns",
+  "info": {
+    "singularName": "town",
+    "pluralName": "towns",
+    "displayName": "towns",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name"
+    },
+    "postcode_area": {
+      "type": "string"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "city",
+        "town",
+        "village",
+        "hamlet"
+      ],
+      "default": "town",
+      "required": true
+    },
+    "county": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::county.county"
+    },
+    "description": {
+      "type": "blocks",
+      "required": true
+    },
+    "walks": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::walk.walk",
+      "mappedBy": "town"
+    },
+    "featured_image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images",
+        "files"
+      ]
+    },
+    "gallery": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files"
+      ]
+    },
+    "seo": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.seo"
+    }
+  }
+}

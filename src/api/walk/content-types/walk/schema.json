@@ -78,30 +78,6 @@
         "audios"
       ]
     },
-    "Town": {
-      "type": "string"
-    },
-    "Features2": {
-      "type": "customField",
-      "default": "[]",
-      "options": [
-        "Free Parking",
-        "Paid Parking",
-        "Accessible (Wheelchair/Pushchair Friendly)",
-        "Refreshments (Café or Pub Nearby)",
-        "Public Restrooms",
-        "Dog-Friendly Water Stations",
-        "Off-Lead Walking Area",
-        "Dog Waste Bins",
-        "Seating/Rest Areas",
-        "Shaded Areas",
-        "Picnic Spots",
-        "Children’s Playground",
-        "Scenic Viewpoints",
-        "Camping Allowed"
-      ],
-      "customField": "plugin::multi-select.multi-select"
-    },
     "Terrain2": {
       "type": "customField",
       "default": "[]",
@@ -122,8 +98,27 @@
       ],
       "customField": "plugin::multi-select.multi-select"
     },
-    "region": {
-      "type": "string"
+    "county": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::county.county",
+      "inversedBy": "walks"
+    },
+    "town": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::town.town",
+      "inversedBy": "walks"
+    },
+    "postcode": {
+      "type": "string",
+      "required": true
+    },
+    "features": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::feature.feature",
+      "inversedBy": "walks"
     }
   }
 }
